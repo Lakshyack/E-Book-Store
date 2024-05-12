@@ -1,0 +1,23 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	scroll-behavior:smooth;
+}
+#wrapper{
+	height:"100vh";
+    background-color: rgb(242, 242, 242);	
+}
+.bg-custom{
+	background-color:rgb(6, 28, 215);
+}
+.navbar .nav-item:hover .nav-link{
+	background-color:white;
+	color:rgb(6, 28, 215);
+	border-radius:15px; 
+}
+
+
+
+
+
