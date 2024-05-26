@@ -22,7 +22,7 @@ public class BookDAOImpl implements BookDAO {
 	public boolean addBooks(BookDtls b) {
 		boolean f = false;
 		try {
-			String sql = "insert into book_dtls(bookname,author,price,bookCategory,status,photo,user_email) values(?,?,?,?,?,?,?)";
+			String sql = "insert into book_dtls(bookname,author,price,bookCategory,status,photo,email) values(?,?,?,?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, b.getBookName());
 			ps.setString(2, b.getAuthor());
@@ -358,7 +358,7 @@ public class BookDAOImpl implements BookDAO {
 		BookDtls b = null;
 
 		try {
-			String sql = "select * from book_dtls  where bookCategory=? and user_email=? ";
+			String sql = "select * from book_dtls  where bookCategory=? and email=? ";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, categ);
 			ps.setString(2, email);
