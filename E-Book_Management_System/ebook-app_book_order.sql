@@ -16,32 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cart`
+-- Table structure for table `book_order`
 --
 
-DROP TABLE IF EXISTS `cart`;
+DROP TABLE IF EXISTS `book_order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cart` (
-  `cid` int NOT NULL AUTO_INCREMENT,
-  `bid` int NOT NULL,
-  `uid` int NOT NULL,
-  `bookName` varchar(45) DEFAULT NULL,
+CREATE TABLE `book_order` (
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `user_Name` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `address` varchar(110) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `book_Name` varchar(45) DEFAULT NULL,
   `author` varchar(45) DEFAULT NULL,
-  `price` double DEFAULT NULL,
-  `total_Price` double DEFAULT NULL,
-  PRIMARY KEY (`cid`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `price` varchar(45) DEFAULT NULL,
+  `payment` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cart`
+-- Dumping data for table `book_order`
 --
 
-LOCK TABLES `cart` WRITE;
-/*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (21,7,8,'book','new',785,785),(22,7,8,'book','new',785,785);
-/*!40000 ALTER TABLE `cart` ENABLE KEYS */;
+LOCK TABLES `book_order` WRITE;
+/*!40000 ALTER TABLE `book_order` DISABLE KEYS */;
+INSERT INTO `book_order` VALUES (1,'Lakshya','Lakshyak7370@gmail.com','Prakash lok Colony,SD pubic school,saharanpur,,Uttar pradesh,24','8923163204','Let_us_c','Yashwant.h','225.0','COD'),(4,'Lakshya','Lakshyak7370@gmail.com','Prakash lok Colony,47,saharanpur,,Uttar pradesh,24710','8923163204','Let_us_c','Yashwant.h','225.0','COD'),(5,'Lakshya','Lakshyak7370@gmail.com','Prakash lok Colony,SD,S,,Uttar pradesh,247001','8923163204','Let_us_c','Yashwant.h','225.0','COD'),(6,'Lakshya','Lakshyak7370@gmail.com','458,llll,saharanpur,,Uttar pradesh,4785','8923163204','book','new','785.0','COD'),(7,'Lakshya','Lakshyak7370@gmail.com','458,llll,saharanpur,,Uttar pradesh,4785','8923163204','book','new','785.0','COD');
+/*!40000 ALTER TABLE `book_order` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

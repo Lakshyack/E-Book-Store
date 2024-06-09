@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `ebook-app` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `ebook-app`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ebook-app
@@ -29,12 +27,13 @@ CREATE TABLE `book_dtls` (
   `bookName` varchar(45) DEFAULT NULL,
   `author` varchar(45) DEFAULT NULL,
   `price` double DEFAULT NULL,
+  `stock` varchar(45) DEFAULT NULL,
   `bookCategory` varchar(255) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
   `photo` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`bookID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +42,7 @@ CREATE TABLE `book_dtls` (
 
 LOCK TABLES `book_dtls` WRITE;
 /*!40000 ALTER TABLE `book_dtls` DISABLE KEYS */;
-INSERT INTO `book_dtls` VALUES (1,'C programing','Balaguruswami',200,'New Book','Active','C programing.jpeg',NULL),(2,'THE_c_language','W.Kernighan',599,'Old Book','Active','THE_c_language.jpeg',NULL),(3,'Let_us_c','Yashwant.h',225,'Recent Book','Active','Let_us_c.jpeg',NULL),(4,'All_in_one_python','Jhon.c',680,'Old Book','Active','All_in_one_python.jpeg',NULL),(5,'java','sjxn',145,'New','Active','under ocean.jpg','admin');
+INSERT INTO `book_dtls` VALUES (7,'book','new',785,'8','New','Active','img.jpg','admin'),(8,'laks','lak',45,'10','New','Active','WhatsApp Image 2024-05-20 at 11.05.32 AM.jpeg','admin');
 /*!40000 ALTER TABLE `book_dtls` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-07  9:15:12
+-- Dump completed on 2024-06-09 10:23:05
