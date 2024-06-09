@@ -1,5 +1,8 @@
 <%@page import="com.admin.servlet.BooksDeleteServlet"%>
+<%@page import="com.user.entity.User"%>
 <%@page import="com.user.entity.BookDtls"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="com.user.entity.Admin"%>
 <%@page import="java.util.List"%>
 <%@page import="com.DB.DBConnect"%>
 <%@page import="com.DAO.BookDAOImpl"%>
@@ -8,6 +11,9 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page isELIgnored="false"%>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +23,13 @@
 </head>
 <body>
 	<%@include file="navbar.jsp"%>
-	<c:if test="${empty userobj }">
+	<%
+	User user = (User) session.getAttribute("userobj");
+	Admin admin = (Admin) session.getAttribute("Adminobj");
+	%>
+	<% session.setAttribute("userobj", user);%>
+	<% session.setAttribute("Adminobj", admin);%>
+	<c:if test="${empty userobj && empty Adminobj}">
 		<c:redirect url="../login.jsp" />
 	</c:if>
 

@@ -24,7 +24,8 @@ import com.user.entity.BookDtls;
 import com.user.entity.Book_Order;
 import com.user.entity.Cart;
 import com.user.entity.User;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 @WebServlet("/order")
 public class OrderServlet extends HttpServlet {
 
@@ -45,6 +46,17 @@ public class OrderServlet extends HttpServlet {
 
 			String fullAdd = address + "," + landmark + "," + city + "," + "," + state + "," + pincode;
 
+			// Get current date and time
+			LocalDateTime now = LocalDateTime.now();
+			// Define the format
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss a");
+			// Format the date and time
+			String currentDateTimeString = now.format(formatter);
+			// Add 7 days to the current date and time
+			LocalDateTime futureDate = now.plusDays(7);
+
+			// Format the future date and time
+			String futureDateTimeString = futureDate.format(formatter);
 
 
 			CartDAOImpl dao = new CartDAOImpl(DBConnect.getConnection());
@@ -75,6 +87,8 @@ public class OrderServlet extends HttpServlet {
 					o.setAuthor(c.getAuthor());
 					o.setPrice(c.getPrice() + "");
 					o.setPaymentType(paymentType);
+					o.setOrderDate(currentDateTimeString);
+					o.setPlaceDate(futureDateTimeString);
 					orderList.add(o);
 
 				}

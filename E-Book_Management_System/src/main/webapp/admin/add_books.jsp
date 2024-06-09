@@ -1,7 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" %>
+<%@page import="com.user.entity.User"%>
+<%@page import="com.user.entity.BookDtls"%>
+<%@page import="java.util.List"%>
+<%@page import="com.DAO.BookDAOImpl"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="com.user.entity.Admin"%>
+<%@page import="com.DB.DBConnect"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@page isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +17,14 @@
 </head>
 <body>
 	<%@include file="navbar.jsp"%>
+	<%
+	User user = (User) session.getAttribute("userobj");
+	Admin admin = (Admin) session.getAttribute("Adminobj");
+	%>
+	<% session.setAttribute("userobj", user);%>
+	<% session.setAttribute("Adminobj", admin);%>
 	
-	<c:if test="${empty userobj }">
+	<c:if test="${empty userobj && empty Adminobj}">
 		<c:redirect url="../login.jsp" />
 	</c:if>
 

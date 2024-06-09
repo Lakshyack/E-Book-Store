@@ -1,10 +1,19 @@
 <%@page import="com.user.entity.Book_Order"%>
+<%@page import="com.DAO.BookOrderImpl"%>
+<%@page import="com.admin.servlet.BooksDeleteServlet"%>
+<%@page import="com.user.entity.User"%>
+<%@page import="com.user.entity.BookDtls"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="com.user.entity.Admin"%>
 <%@page import="java.util.List"%>
 <%@page import="com.DB.DBConnect"%>
-<%@page import="com.user.entity.User"%>
-<%@page import="com.DAO.BookOrderImpl"%>
+<%@page import="com.DAO.BookDAOImpl"%>
+<%@page import="com.DAO.BookDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page isELIgnored="false"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +24,15 @@
 <body>
 	<%@include file="navbar.jsp"%>
 
-	<c:if test="${empty userobj }">
+	<%
+	User user = (User) session.getAttribute("userobj");
+	Admin admin = (Admin) session.getAttribute("Adminobj");
+	%>
+	<% session.setAttribute("userobj", user);%>
+	<% session.setAttribute("Adminobj", admin);%>
+	<c:if test="${empty userobj && empty Adminobj}">
 		<c:redirect url="../login.jsp" />
 	</c:if>
-
 	<div id="wrapper">
 		<div class="container-fluid ">
 			<h3 class="text-center text-primary ">Hello Admin</h3>

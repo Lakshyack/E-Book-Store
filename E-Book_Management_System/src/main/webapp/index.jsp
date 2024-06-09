@@ -3,6 +3,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.DAO.BookDAOImpl"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="com.user.entity.Admin"%>
 <%@page import="com.DB.DBConnect"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -38,10 +39,14 @@
 .dropbtn {
     background-color: #4CAF50;
     color: white;
-    padding: 8px;
+    padding: 6px;
     font-size: 14px;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
+}
+
+.dropbtn>a {
+   text-decoration: none;
 }
 
 /* Container needed to position the dropdown content */
@@ -97,7 +102,11 @@
 
 	<%
 	User u = (User) session.getAttribute("userobj");
+	Admin A = (Admin) session.getAttribute("Adminobj");
+	
 	%>
+	<% session.setAttribute("userobj", u);%>
+	<% session.setAttribute("Adminobj", A);%>
 	<div class="container-fluid"
 	style="height: 10px; background-color: rgb(6, 28, 215);"></div>
 
@@ -111,7 +120,7 @@
 			</h3>
 		</div>
 
-		<div class="col-md-5">
+		<div class="col-md-6">
 			<form class="form-inline my-2 my-lg-0" action="search.jsp" method="post">
 				<input class="form-control mr-sm-2" type="search" name="ch"
 					placeholder="Search" aria-label="Search">
@@ -119,13 +128,65 @@
 			</form>
 		</div>
 		
+		<c:if test="${not empty Adminobj }">
+			<div class="col-md-2" style="position: relative;right: 0;">
+			
+				<a href="admin/home.jsp" class="btn btn-success" >
+					<!-- <i class="fa-solid fa-user"></i> -->
+					<img src="AdminProfile/<%= A.getProfile() %>" class="img-fluid "
+					style="border-radius: 50%; height: 20px; width: 20px; border: 0.5px solid black;"
+					alt="">
+					 ${Adminobj.name }</a> 
+			</div>
+		</c:if>
+
 		<c:if test="${not empty userobj }">
-		
-			<div class="col-md-4">
-				<a href="checkout.jsp" class="btn btn-primary text-white"><i class="fa-solid fa-cart-plus"></i> Cart</a>
-				<a href="" class="btn btn-success" data-toggle="modal" data-target="#profile-modal"><i class="fa-solid fa-user"></i> ${userobj.name }</a> 
+			<div class="col-md-3">
+
+
+				<div class="dropdown">
+					<button class="dropbtn btn btn-success" > 	
+							<!-- <i class="fa-solid fa-user"></i> -->
+							<img src="UserProfile/<%= u.getProfile() %>" class="img-fluid "
+							style="border-radius: 50%; height: 20px; width: 20px; border: 0.5px solid black;"
+							alt="">
+							 ${userobj.name}</button>
+					<div class="dropdown-content">
+						<a href="" class="btn" data-toggle="modal" data-target="#profile-modal">
+							<!-- <i class="fa-solid fa-user"></i> -->
+							<img src="UserProfile/<%= u.getProfile() %>" class="img-fluid "
+							style="border-radius: 50%; height: 20px; width: 20px; border: 0.5px solid black;"
+							alt="">
+							 Profile Center</a> 
+							 <a href="setting.jsp" class="btn btn-light my-2 my-sm-0" type="submit">
+								<i class="fa-solid fa-gear"></i> User Menu
+							</a>
+
+						
+						<a href="checkout.jsp" class="btn"><i class="fa-solid fa-cart-plus"></i> Cart</a>
+					
+							
+						
+					
+					</div>
+				</div>
+
+
+
+
+				<!-- <a href="checkout.jsp" class="btn btn-primary text-white"><i class="fa-solid fa-cart-plus"></i> Cart</a> -->
+			
+					
 				<a href="logout" class="btn btn-primary text-white"><i class="fa-solid fa-right-to-bracket "></i> Logout</a>
 			</div>
+		</c:if>
+
+
+<!-- for user -->
+
+		<c:if test="${not empty userobj }">
+		
+			
 		
 			<!-- modal start -->
    <!-- Modal -->
@@ -191,6 +252,7 @@
                                         <!-- <td> -->
 											<input type="hidden" value=" <%= u.getId() %>" name="id">
 											<% session.setAttribute("user_id", u.getId());%>
+											<% session.setAttribute("USpass", u.getPassword());%>
 											<% session.setAttribute("u", u);%>
                                         
                                         <!-- </td> -->
@@ -259,14 +321,16 @@
 
 		</c:if>
 		
+		<c:if test="${empty Adminobj && empty userobj }">
  	
-		<c:if test="${empty userobj }">
+	
 			<div class="col-md-3">
 				<div class="dropdown">
 					<button class="dropbtn btn btn-success" ><i
 						class="fa-solid fa-right-to-bracket"></i> Login</button>
 					<div class="dropdown-content">
 						<a href="login.jsp" ><i
+						
 							class="fa-solid fa-right-to-bracket"></i> User Login</a> 
 						<a href="adminLogin.jsp" ><i
 							class="fa-solid fa-right-to-bracket"></i> Admin Login</a> 
@@ -285,6 +349,7 @@
 </div>
 
 <%@include file="all_component/navbar.jsp"%>
+
 
 
 	<div id="wrapper">

@@ -12,6 +12,9 @@ public class Book_Order {
 	private String bookName;
 	private String author;
 	private String price;
+	private String OrderDate;
+	private String PlaceDate;
+
 	
 	
 	
@@ -76,15 +79,38 @@ public class Book_Order {
 	public void setPaymentType(String paymentType) {
 		this.paymentType = paymentType;
 	}
-	
-	
-	
+
+    public String getOrderDate() {
+        return OrderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        OrderDate = orderDate;
+    }
+
+    public String getPlaceDate() {
+        return PlaceDate;
+    }
+
+    public void setPlaceDate(String placeDate) {
+        PlaceDate = placeDate;
+    }
+
 	@Override
 	public String toString() {
-		return "Book_Order [id=" + id + ", userName=" + userName + ", email=" + email + ", phno=" + phno + ", fulladd="
-				+ fulladd + ", paymentType=" + paymentType + "]";
+		return "Book_Order{" +
+				"id=" + id +
+				", orderId='" + orderId + '\'' +
+				", userName='" + userName + '\'' +
+				", email='" + email + '\'' +
+				", phno='" + phno + '\'' +
+				", fulladd='" + fulladd + '\'' +
+				", paymentType='" + paymentType + '\'' +
+				", bookName='" + bookName + '\'' +
+				", author='" + author + '\'' +
+				", price='" + price + '\'' +
+				", OrderDate='" + OrderDate + '\'' +
+				", PlaceDate='" + PlaceDate + '\'' +
+				'}';
 	}
-	
-	
-
 }

@@ -24,8 +24,8 @@ public class BookOrderImpl implements BookOrderDAO {
 	public boolean saveOrder(List<Book_Order> blist) {
 		boolean f = false;
 		try {
-			String sql = "insert into book_order(user_name,email,address,phone,book_name,author,price,payment)"
-					+ "values(?,?,?,?,?,?,?,?)";
+			String sql = "insert into book_order(user_name,email,address,phone,book_name,author,price,payment,orderdate,placedate)"
+					+ "values(?,?,?,?,?,?,?,?,?,?)";
 
 
 			con.setAutoCommit(false);
@@ -40,6 +40,8 @@ public class BookOrderImpl implements BookOrderDAO {
 				ps.setString(6, b.getAuthor());
 				ps.setString(7, b.getPrice());
 				ps.setString(8, b.getPaymentType());
+				ps.setString(9,b.getOrderDate());
+				ps.setString(10,b.getPlaceDate());
 				
 				ps.addBatch();
 				
@@ -78,6 +80,8 @@ public class BookOrderImpl implements BookOrderDAO {
 				o.setAuthor(rs.getString(7));
 				o.setPrice(rs.getString(8));
 				o.setPaymentType(rs.getString(9));
+				o.setOrderDate(rs.getString(10));
+				o.setPlaceDate(rs.getString(11));
 				list.add(o);
 			}
 			
@@ -109,6 +113,8 @@ public class BookOrderImpl implements BookOrderDAO {
 				o.setAuthor(rs.getString(7));
 				o.setPrice(rs.getString(8));
 				o.setPaymentType(rs.getString(9));
+				o.setOrderDate(rs.getString(10));
+				o.setPlaceDate(rs.getString(11));
 				list.add(o);
 			}
 			

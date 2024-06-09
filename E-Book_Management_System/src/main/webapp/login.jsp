@@ -29,7 +29,7 @@
 								<c:remove var="succMsg" scope="session" />
 							</c:if>
 
-							<form name="login" action="login.ik" method="post">
+							<form name="loginUser" action="login.ik" method="post">
 								<div class="form-group">
 									<label for="exampleInputEmail1">Email address</label> <input
 										type="email" class="form-control" id="exampleInputEmail1"

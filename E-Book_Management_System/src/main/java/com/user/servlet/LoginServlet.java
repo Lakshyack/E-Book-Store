@@ -14,7 +14,7 @@ import com.DAO.UserDAOImpl;
 import com.DB.DBConnect;
 import com.user.entity.User;
 
-@WebServlet(name="login",urlPatterns = {"/login.ik"})
+@WebServlet(name="loginUser",urlPatterns = {"/login.ik"})
 public class LoginServlet extends HttpServlet{
 
 	@Override
@@ -27,15 +27,7 @@ public class LoginServlet extends HttpServlet{
 		HttpSession session=req.getSession();
 
 		
-		if("admin@gmail.com".equals(email) && "admin".equals(password)) {
-			User us=new User();
-			us.setName("Lakshya");
 
-			session.setAttribute("userobj", us);
-
-			resp.sendRedirect("admin/home.jsp");
-
-		}else {
 			
 			User us=dao.login(email, password);
 			if(us != null) {
@@ -50,5 +42,5 @@ public class LoginServlet extends HttpServlet{
 		
 	}
 
-}
+
 

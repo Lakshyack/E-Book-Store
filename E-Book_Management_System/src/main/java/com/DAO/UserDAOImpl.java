@@ -7,11 +7,10 @@ import java.sql.ResultSet;
 import com.user.entity.User;
 
 public class UserDAOImpl implements UserDAO{
-	
+
 	private Connection con;
-	
-	
-	
+
+
 	public UserDAOImpl(Connection con) {
 		super();
 		this.con = con;

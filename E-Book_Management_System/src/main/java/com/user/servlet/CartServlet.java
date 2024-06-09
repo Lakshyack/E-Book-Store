@@ -14,6 +14,7 @@ import com.DAO.CartDAOImpl;
 import com.DB.DBConnect;
 import com.user.entity.BookDtls;
 import com.user.entity.Cart;
+import com.user.entity.User;
 
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet{
@@ -39,10 +40,12 @@ public class CartServlet extends HttpServlet{
 			boolean f=dao2.addCart(c);
 			
 			HttpSession session=req.getSession();
+			User U = (User) session.getAttribute("userobj");
 			
 			if(f) {
 				session.setAttribute("addCart", "Book Added To Cart");
-				resp.sendRedirect("view_book.jsp?bid=" + c.getBid());
+				session.setAttribute("userobj",U);
+				resp.sendRedirect("checkout.jsp");
 			}else {
 				session.setAttribute("failed", "Something Wrong On Server");
 				resp.sendRedirect("view_book.jsp?bid=" + c.getBid());

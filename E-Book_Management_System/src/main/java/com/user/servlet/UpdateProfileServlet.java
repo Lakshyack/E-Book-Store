@@ -10,6 +10,7 @@ import javax.servlet.http.Part;
 import com.DAO.UserDAOImpl;
 import com.DB.DBConnect;
 import com.helper.helper;
+import com.user.entity.Admin;
 import com.user.entity.User;
 
 @WebServlet("/update_profile")
@@ -22,6 +23,7 @@ public class UpdateProfileServlet extends HttpServlet {
 
 			HttpSession session = req.getSession();
 			Integer userId = (Integer) session.getAttribute("user_id");
+			String oldPass =(String) session.getAttribute("USpass");
 			User u = (User) session.getAttribute("u");
 			String oldFile = u.getProfile();
 			if (userId == null) {
@@ -57,7 +59,7 @@ public class UpdateProfileServlet extends HttpServlet {
 
 
 			UserDAOImpl dao = new UserDAOImpl(DBConnect.getConnection());
-			boolean f = dao.checkPassword(userId, password);
+			boolean f = dao.checkPassword(userId,oldPass );
 
 			if (!oldFile.equals("Default.png")) {
 				helper.deleteFile(pathForDeleteFile);
@@ -68,8 +70,10 @@ public class UpdateProfileServlet extends HttpServlet {
 
 			if (f) {
 				boolean f2 = dao.updateProfile(us);
+				User AD = dao.login(email,password);
 				if (f2) {
 					session.setAttribute("succMsg", "Profile Update Successfully !!!");
+					session.setAttribute("userobj", AD);
 					resp.sendRedirect("index.jsp");
 				} else {
 					session.setAttribute("failedMsg", "Something Wrong On Server");

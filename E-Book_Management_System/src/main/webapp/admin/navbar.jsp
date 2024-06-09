@@ -16,21 +16,7 @@
 		<div class="col-md-6">
 			
 		</div>
-
-		<div class="col-md-3">
-			<c:if test="${not empty userobj }">
-				<a  class="btn btn-success text-white"><i
-					class="fa-solid fa-user"></i> ${userobj.name }</a>
-				<a  data-toggle="modal" data-target="#exampleModalCenter"
-					  class="btn btn-primary text-white"><i
-					class="fa-solid fa-right-to-bracket"></i> Logout</a>
-			</c:if>
-			<c:if test="${empty userobj }">
-				<a href="../login.jsp" class="btn btn-success"><i
-					class="fa-solid fa-right-to-bracket"></i> Login</a>
-				<a href="../register.jsp" class="btn btn-primary text-white"><i
-					class="fa-solid fa-user-plus "></i> Register</a>
-			</c:if>
+		
 		</div>
 	</div>
 
@@ -76,9 +62,11 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link" href="home.jsp">Home
+			<li class="nav-item active"><a class="nav-link" href="home.jsp">Admin Home
 					<span class="sr-only">(current)</span>
 			</a>
 		</ul>
+	
 	</div>
 </nav>
+<%@include file="js.jsp"%>

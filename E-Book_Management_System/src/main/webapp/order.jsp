@@ -32,6 +32,8 @@
 						<th scope="col">Author</th>
 						<th scope="col">Price</th>
 						<th scope="col">Payment Mode</th>
+						<th scope="col">Order Date(Time)</th>
+						<th scope="col">Delivery Date(Time)</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,6 +51,8 @@
 						<td><%=b.getAuthor()%></td>
 						<td><%=b.getPrice()%></td>
 						<td><%=b.getPaymentType()%></td>
+						<td><%=b.getOrderDate()%></td>
+						<td><%=b.getPlaceDate()%></td>
 					</tr>
 					<%
 					}
