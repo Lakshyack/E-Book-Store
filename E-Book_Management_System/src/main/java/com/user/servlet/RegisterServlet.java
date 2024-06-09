@@ -1,19 +1,18 @@
 package com.user.servlet;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 import com.DAO.UserDAOImpl;
 import com.DB.DBConnect;
 import com.user.entity.User;
-
+@MultipartConfig
 @WebServlet(name="register", urlPatterns = {"/register.ik"})
 public class RegisterServlet extends HttpServlet{
 
@@ -25,6 +24,9 @@ public class RegisterServlet extends HttpServlet{
 		String phno=req.getParameter("phno");
 		String password=req.getParameter("password");
 		String check=req.getParameter("check");
+		Part part = req.getPart("file");
+		String image = part.getSubmittedFileName();
+
 		
 //		System.out.println(fname +" "+email+" "+phno+" "+password+" "+check);
 		
@@ -33,9 +35,15 @@ public class RegisterServlet extends HttpServlet{
 		us.setEmail(email);
 		us.setPhno(phno);
 		us.setPassword(password);
+		us.setProfile(image);
 		
 		HttpSession session=req.getSession();
-		
+
+		String path=getServletContext().getRealPath("")+"UserProfile";
+
+		File file=new File(path);
+		part.write(path + File.separator + image);
+
 		if(check !=null) {
 			
 			UserDAOImpl dao=new UserDAOImpl(DBConnect.getConnection());

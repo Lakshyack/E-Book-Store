@@ -29,13 +29,14 @@ public class AddOldBook extends HttpServlet{
 		String bookName=req.getParameter("bname");
 		String author=req.getParameter("author");
 		String price=req.getParameter("price");
+		String stock = req.getParameter("stock");
 		String category="Old";
 		String status="Active";
 		Part part=req.getPart("bimg");
 		String fileName=part.getSubmittedFileName();
 		String useremail=req.getParameter("user");
 		
-		BookDtls b=new BookDtls(bookName,author,price,category,status,fileName,useremail);
+		BookDtls b=new BookDtls(bookName,author,price,stock,category,status,fileName,useremail);
 		
 		BookDAOImpl dao=new BookDAOImpl(DBConnect.getConnection());
 		

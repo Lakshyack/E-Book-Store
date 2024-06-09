@@ -79,26 +79,37 @@ public class CartDAOImpl implements CartDAO{
 
 
 	@Override
-	public boolean deleteBook(int bid,int uid,int cid) {
-		boolean f=false;
+	public boolean deleteBook(int bid, int uid, int cid) {
+		boolean f = false;
 		try {
-			String sql="delete from cart where bid=? and uid=? and cid=?";
-			PreparedStatement ps=con.prepareStatement(sql);
+			// SQL query to delete a specific book from the cart
+			String sql = "DELETE FROM cart WHERE bid = ? AND uid = ? AND cid = ?";
+
+			// Create a PreparedStatement to execute the SQL query
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			// Set the parameters for the PreparedStatement
 			ps.setInt(1, bid);
 			ps.setInt(2, uid);
 			ps.setInt(3, cid);
-			int x=ps.executeUpdate();
-			if(x ==1) {
-				f=true;
+
+			// Execute the update (delete) operation
+			int x = ps.executeUpdate();
+
+			// Check if exactly one row was affected (deleted)
+			if (x == 1) {
+				f = true;
 			}
-			
-		}catch (Exception e) {
+		} catch (Exception e) {
+			// Print the stack trace if an exception occurs
 			e.printStackTrace();
 		}
+		// Return the result of the deletion operation
 		return f;
 	}
-	
-	
-	
-	
+
+
+
+
+
 }

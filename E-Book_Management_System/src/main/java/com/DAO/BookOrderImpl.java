@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.user.entity.Book_Order;
+import com.user.entity.Cart;
+
+import javax.servlet.http.HttpSession;
 
 public class BookOrderImpl implements BookOrderDAO {
 
@@ -21,22 +24,22 @@ public class BookOrderImpl implements BookOrderDAO {
 	public boolean saveOrder(List<Book_Order> blist) {
 		boolean f = false;
 		try {
-			String sql = "insert into book_order(order_id,user_name,email,address,phone,book_name,author,price,payment)"
-					+ "values(?,?,?,?,?,?,?,?,?)";
-			
+			String sql = "insert into book_order(user_name,email,address,phone,book_name,author,price,payment)"
+					+ "values(?,?,?,?,?,?,?,?)";
+
+
 			con.setAutoCommit(false);
 			PreparedStatement ps=con.prepareStatement(sql);
 			
 			for(Book_Order b: blist) {
-				ps.setString(1, b.getOrderId());
-				ps.setString(2, b.getUserName());
-				ps.setString(3, b.getEmail());
-				ps.setString(4, b.getFulladd());
-				ps.setString(5, b.getPhno());
-				ps.setString(6, b.getBookName());
-				ps.setString(7, b.getAuthor());
-				ps.setString(8, b.getPrice());
-				ps.setString(9, b.getPaymentType());
+				ps.setString(1, b.getUserName());
+				ps.setString(2, b.getEmail());
+				ps.setString(3, b.getFulladd());
+				ps.setString(4, b.getPhno());
+				ps.setString(5, b.getBookName());
+				ps.setString(6, b.getAuthor());
+				ps.setString(7, b.getPrice());
+				ps.setString(8, b.getPaymentType());
 				
 				ps.addBatch();
 				
@@ -65,16 +68,16 @@ public class BookOrderImpl implements BookOrderDAO {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				o=new Book_Order();
-				o.setId(rs.getInt(1));
-				o.setOrderId(rs.getString(2));
-				o.setUserName(rs.getString(3));
-				o.setEmail(rs.getString(4));
-				o.setFulladd(rs.getString(5));
-				o.setPhno(rs.getString(6));
-				o.setBookName(rs.getString(7));
-				o.setAuthor(rs.getString(8));
-				o.setPrice(rs.getString(9));
-				o.setPaymentType(rs.getString(10));
+
+				o.setOrderId(rs.getString(1));
+				o.setUserName(rs.getString(2));
+				o.setEmail(rs.getString(3));
+				o.setFulladd(rs.getString(4));
+				o.setPhno(rs.getString(5));
+				o.setBookName(rs.getString(6));
+				o.setAuthor(rs.getString(7));
+				o.setPrice(rs.getString(8));
+				o.setPaymentType(rs.getString(9));
 				list.add(o);
 			}
 			
@@ -96,16 +99,16 @@ public class BookOrderImpl implements BookOrderDAO {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				o=new Book_Order();
-				o.setId(rs.getInt(1));
-				o.setOrderId(rs.getString(2));
-				o.setUserName(rs.getString(3));
-				o.setEmail(rs.getString(4));
-				o.setFulladd(rs.getString(5));
-				o.setPhno(rs.getString(6));
-				o.setBookName(rs.getString(7));
-				o.setAuthor(rs.getString(8));
-				o.setPrice(rs.getString(9));
-				o.setPaymentType(rs.getString(10));
+
+				o.setOrderId(rs.getString(1));
+				o.setUserName(rs.getString(2));
+				o.setEmail(rs.getString(3));
+				o.setFulladd(rs.getString(4));
+				o.setPhno(rs.getString(5));
+				o.setBookName(rs.getString(6));
+				o.setAuthor(rs.getString(7));
+				o.setPrice(rs.getString(8));
+				o.setPaymentType(rs.getString(9));
 				list.add(o);
 			}
 			

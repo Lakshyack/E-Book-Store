@@ -57,6 +57,13 @@
 										aria-describedby="emailHelp" name="price">
 								</div>
 
+								
+								<div class="form-group">
+									<label for="exampleInputEmail1">Stock</label> <input
+										type="number" class="form-control" id="exampleInputEmail1"
+										aria-describedby="emailHelp" name="stock">
+								</div>
+
 								<div class="form-group">
 									<label for="inputState">Book Categories</label> <select
 										class="form-control" id="inputState" name="category">

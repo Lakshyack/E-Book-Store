@@ -1,61 +1,87 @@
 package com.user.servlet;
 
+import java.io.File;
 import java.io.IOException;
-
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import javax.servlet.http.*;
+import javax.servlet.http.Part;
 import com.DAO.UserDAOImpl;
 import com.DB.DBConnect;
+import com.helper.helper;
 import com.user.entity.User;
 
 @WebServlet("/update_profile")
-public class UpdateProfileServlet extends HttpServlet{
+@MultipartConfig
+public class UpdateProfileServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			int id=Integer.parseInt(req.getParameter("id"));
-			String fname=req.getParameter("fname");
-			String email=req.getParameter("email");
-			String phno=req.getParameter("phno");
-			String password=req.getParameter("password");
-			
-			User us=new User();
-			us.setId(id);
+
+			HttpSession session = req.getSession();
+			Integer userId = (Integer) session.getAttribute("user_id");
+			User u = (User) session.getAttribute("u");
+			String oldFile = u.getProfile();
+			if (userId == null) {
+				throw new IllegalArgumentException("User ID not found in session. Please login again.");
+			}
+
+			String fname = req.getParameter("user_name");
+			String email = req.getParameter("email");
+			String phno = req.getParameter("phno");
+			String password = req.getParameter("password");
+			Part part = req.getPart("file");
+			System.out.println(part);
+			String profile = part.getSubmittedFileName();
+
+			// Print all parameters to console
+
+
+			User us = new User();
+			us.setId(userId);
 			us.setName(fname);
 			us.setEmail(email);
+			us.setPassword(password);
 			us.setPhno(phno);
-			
-			HttpSession session=req.getSession();
-			UserDAOImpl dao=new UserDAOImpl(DBConnect.getConnection());
-			boolean f=dao.checkPassword(id, password);
-			
-			if(f) {
-				boolean f2=dao.updateProfile(us);
-				if(f2) {
+			if (us.getProfile() != null) {
+				oldFile = us.getProfile();
+				us.setProfile(profile);
+			} else {
+				us.setProfile(profile);
+			}
+
+			String path = getServletContext().getRealPath("") + "UserProfile";
+			String pathForDeleteFile = req.getRealPath("/") + "UserProfile" + File.separator + oldFile;
+
+
+			UserDAOImpl dao = new UserDAOImpl(DBConnect.getConnection());
+			boolean f = dao.checkPassword(userId, password);
+
+			if (!oldFile.equals("Default.png")) {
+				helper.deleteFile(pathForDeleteFile);
+			}
+
+			File file = new File(path);
+			part.write(path + File.separator + profile);
+
+			if (f) {
+				boolean f2 = dao.updateProfile(us);
+				if (f2) {
 					session.setAttribute("succMsg", "Profile Update Successfully !!!");
-					resp.sendRedirect("edit_profile.jsp");
-					
-				}else {
+					resp.sendRedirect("index.jsp");
+				} else {
 					session.setAttribute("failedMsg", "Something Wrong On Server");
-					resp.sendRedirect("edit_profile.jsp");
-					
+					resp.sendRedirect("index.jsp");
 				}
-			}else {
+			} else {
 				session.setAttribute("failedMsg", "Your Password Is Incorrect !!!");
 				resp.sendRedirect("edit_profile.jsp");
 			}
-			
-			
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
 }

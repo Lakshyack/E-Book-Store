@@ -30,7 +30,7 @@
 							<c:remove var="failedMsg" scope="session"/>
 						</c:if>
 
-						<form name="register" action="register.ik" method="post">
+						<form name="register" action="register.ik" method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="exampleInputEmail1">Enter Full Name</label> <input
 									type="text" class="form-control" id="exampleInputEmail1"
@@ -53,6 +53,11 @@
 								<label for="exampleInputPassword1">Password</label> <input
 									type="password" class="form-control" id="exampleInputPassword1"
 									placeholder="Password" required="required" name="password">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Profile Image</label> <input
+									type="file" class="form-control" id="exampleInputPassword1"
+									placeholder="Password" required="required" name="file">
 							</div>
 							<div class="form-check">
 								<input type="checkbox" class="form-check-input" name="check"

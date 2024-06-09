@@ -1,6 +1,8 @@
 package com.user.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -12,17 +14,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.DAO.BookDAOImpl;
 import com.DAO.BookOrderImpl;
 import com.DAO.CartDAOImpl;
 import com.DB.DBConnect;
+import com.admin.servlet.StockUpdate;
+//import com.admin.servlet.stockUpdate;
+import com.user.entity.BookDtls;
 import com.user.entity.Book_Order;
 import com.user.entity.Cart;
+import com.user.entity.User;
 
 @WebServlet("/order")
 public class OrderServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		try {
 			int id = Integer.parseInt(req.getParameter("id"));
 			String name = req.getParameter("username");
@@ -37,7 +45,7 @@ public class OrderServlet extends HttpServlet {
 
 			String fullAdd = address + "," + landmark + "," + city + "," + "," + state + "," + pincode;
 
-//			System.out.println(name+" "+email+" "+phno+" "+fullAdd+" "+paymentType);
+
 
 			CartDAOImpl dao = new CartDAOImpl(DBConnect.getConnection());
 			Book_Order o = null;
@@ -53,6 +61,7 @@ public class OrderServlet extends HttpServlet {
 
 				ArrayList<Book_Order> orderList = new ArrayList<Book_Order>();
 				Random r = new Random();
+
 
 
 				for (Cart c : blist) {
@@ -76,8 +85,15 @@ public class OrderServlet extends HttpServlet {
 				} else {
 
 					boolean f = dao2.saveOrder(orderList);
-
+				User u = (User) session.getAttribute("user");
+					List<Cart> book = dao.getBookByUser(u.getId());
+					for(Cart c : book){
+						int bid = c.getBid();
+						StockUpdate ST = new StockUpdate();
+                        ST.updateStock(bid);
+					}
 					if (f) {
+
 						resp.sendRedirect("order_success.jsp");
 
 					} else {
@@ -92,5 +108,7 @@ public class OrderServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+
+
 
 }

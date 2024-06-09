@@ -25,12 +25,16 @@ public class LoginServlet extends HttpServlet{
 		
 		UserDAOImpl dao=new UserDAOImpl(DBConnect.getConnection());
 		HttpSession session=req.getSession();
+
 		
 		if("admin@gmail.com".equals(email) && "admin".equals(password)) {
 			User us=new User();
 			us.setName("Lakshya");
+
 			session.setAttribute("userobj", us);
+
 			resp.sendRedirect("admin/home.jsp");
+
 		}else {
 			
 			User us=dao.login(email, password);

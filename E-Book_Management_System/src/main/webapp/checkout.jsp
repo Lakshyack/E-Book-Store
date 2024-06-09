@@ -50,29 +50,36 @@
 								<tbody>
 
 									<%
-									User u = (User) session.getAttribute("userobj");
-									CartDAOImpl dao = new CartDAOImpl(DBConnect.getConnection());
-									List<Cart> cart = dao.getBookByUser(u.getId());
-									Double totalPrice = 0.00;
-									for (Cart c : cart) {
-										totalPrice = c.getTotalPrice();
+									try {
+										User u = (User) session.getAttribute("userobj");
+										CartDAOImpl dao = new CartDAOImpl(DBConnect.getConnection());
+										List<Cart> cart = dao.getBookByUser(u.getId());
+										Double totalPrice = 0.00;
+										for (Cart c : cart) {
+											totalPrice += c.getTotalPrice();  // Sum up the total prices
 									%>
 									<tr>
-										<th scope="row"><%=c.getBookName()%></th>
-										<td><%=c.getAuthor()%></td>
-										<td><%=c.getPrice()%></td>
-										<td><a href="remove_book?bid=<%=c.getBid()%>&&uid=<%=c.getUserId() %>&&cid=<%=c.getCid() %>"
-											class="btn btn-sm btn-danger">Remove</a></td>
+										<th scope="row"><%= c.getBookName() %></th>
+										<td><%= c.getAuthor() %></td>
+										<td><%= c.getPrice() %></td>
+										<!--  -->
+										<td><a href="remove_book?bid=<%= c.getBid() %>&uid=<%= c.getUserId() %>&cid=<%= c.getCid() %>" class="btn btn-sm btn-danger">Remove</a></td>
 									</tr>
 									<%
-									}
+										}
 									%>
 									<tr>
 										<td><b>Total Price</b></td>
 										<td></td>
-										<td><b><%=totalPrice%></b></td>
+										<td><b><%= totalPrice %></b></td>
 										<td></td>
 									</tr>
+									<%
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+									%>
+									
 								</tbody>
 							</table>
 						</div>
@@ -132,6 +139,21 @@
 									</select>
 								</div>
 								<div class="text-center">
+									<%
+									try {
+										User u = (User) session.getAttribute("userobj");
+										CartDAOImpl dao = new CartDAOImpl(DBConnect.getConnection());
+									
+												session.setAttribute("user",u);
+									
+												
+											} catch (Exception e) {
+												e.printStackTrace();
+											}
+										
+										
+									%>
+										
 									<button class="btn btn-warning">Order Now</button>
 									<a href="index.jsp" class="btn btn-success">Continue
 										Shopping</a>

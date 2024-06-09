@@ -11,9 +11,16 @@ public class User {
 	private String landmark;
 	private String city;
 	private String pincode;
-	
-	
-	
+	private String profile;
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
 	public User() {
 		super();
 	}
@@ -75,7 +82,17 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", phno=" + phno
-				+ ", address=" + address + ", landmark=" + landmark + ", city=" + city + ", pincode=" + pincode + "]";
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", phno='" + phno + '\'' +
+				", address='" + address + '\'' +
+				", landmark='" + landmark + '\'' +
+				", city='" + city + '\'' +
+				", pincode='" + pincode + '\'' +
+				", profile='" + profile + '\'' +
+				'}';
 	}
 }

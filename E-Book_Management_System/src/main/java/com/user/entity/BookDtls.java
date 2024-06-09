@@ -6,6 +6,16 @@ public class BookDtls {
 	private String bookName;
 	private String author;
 	private String price;
+	private String stock;
+
+	public String getStock() {
+		return stock;
+	}
+
+	public void setStock(String stock) {
+		this.stock = stock;
+	}
+
 	private String bookCategory;
 	private String status;
 	private String photoName;
@@ -17,18 +27,18 @@ public class BookDtls {
 	}
 
 
-	public BookDtls( String bookName, String author, String price, String bookCategory, String status,
-			String photoName, String email) {
-		super();
+	public BookDtls(String bookName, String author, String price, String stock, String bookCategory, String status, String photoName, String email) {
+
 		this.bookName = bookName;
 		this.author = author;
 		this.price = price;
+		this.stock = stock;
 		this.bookCategory = bookCategory;
 		this.status = status;
 		this.photoName = photoName;
 		this.email = email;
 	}
-	
+
 	public int getBookId() {
 		return bookId;
 	}
@@ -111,13 +121,15 @@ public class BookDtls {
 
 	@Override
 	public String toString() {
-		return "BookDtls [bookId=" + bookId + ", bookName=" + bookName + ", author=" + author + ", price=" + price
-				+ ", bookCategory=" + bookCategory + ", status=" + status + ", photoName=" + photoName + ", email="
-				+ email + "]";
+		return "BookDtls{" +
+				"bookName='" + bookName + '\'' +
+				", author='" + author + '\'' +
+				", price='" + price + '\'' +
+				", stock='" + stock + '\'' +
+				", bookCategory='" + bookCategory + '\'' +
+				", status='" + status + '\'' +
+				", photoName='" + photoName + '\'' +
+				", email='" + email + '\'' +
+				'}';
 	}
-	
-	
-	
-	
-
 }

@@ -22,17 +22,17 @@ public class UserDAOImpl implements UserDAO{
 	public boolean userRegister(User us) {
 		boolean f=false;
 		try {
-			String sql="insert into user(name,email,phno,password) values(?,?,?,?)";
+			String sql="insert into user(name,email,phno,password,profile) values(?,?,?,?,?)";
 			PreparedStatement ps=con.prepareStatement(sql);
 			ps.setString(1, us.getName());
 			ps.setString(2, us.getEmail());
 			ps.setString(3, us.getPhno());
 			ps.setString(4, us.getPassword());
+			ps.setString(5,us.getProfile());
 			int x=ps.executeUpdate();
 			if(x==1) {
 				f=true;
 			}
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -57,9 +57,10 @@ public class UserDAOImpl implements UserDAO{
 				us.setEmail(rs.getString(3));
 				us.setPhno(rs.getString(4));
 				us.setPassword(rs.getString(5));
-				us.setLandmark(rs.getString(6));
-				us.setCity(rs.getString(7));
-				us.setPincode(rs.getString(8));
+				us.setProfile(rs.getString(6));
+				us.setLandmark(rs.getString(7));
+				us.setCity(rs.getString(8));
+				us.setPincode(rs.getString(9));
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -98,12 +99,13 @@ public class UserDAOImpl implements UserDAO{
 	public boolean updateProfile(User us) {
 		boolean f=false;
 		try {
-			String sql="Update user set name=?,email=?,phno=? where id=?";
+			String sql="Update user set name=?,email=?,phno=?,profile=? where id=?";
 			PreparedStatement ps=con.prepareStatement(sql);
 			ps.setString(1, us.getName());
 			ps.setString(2, us.getEmail());
 			ps.setString(3, us.getPhno());
-			ps.setInt(4, us.getId());
+			ps.setString(4,us.getProfile());
+			ps.setInt(5, us.getId());
 			
 			int x=ps.executeUpdate();
 			if(x==1) {
