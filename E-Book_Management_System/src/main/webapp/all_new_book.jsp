@@ -1,8 +1,10 @@
-<%@page import="com.user.entity.User"%>
 <%@page import="com.DB.DBConnect"%>
 <%@page import="com.user.entity.BookDtls"%>
 <%@page import="java.util.List"%>
 <%@page import="com.DAO.BookDAOImpl"%>
+<%@page import="com.user.entity.User"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="com.user.entity.Admin"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -96,7 +98,12 @@ to {
 	<%@include file="all_component/navbar.jsp"%>
 	<%
 	User u = (User) session.getAttribute("userobj");
+	Admin A = (Admin) session.getAttribute("Adminobj");
+	
 	%>
+	<% session.setAttribute("userobj", u);%>
+	<% session.setAttribute("Adminobj", A);%>
+	
 	<div id="wrapper">
 		<div class="container-fluid">
 			<div class="row">
@@ -108,7 +115,7 @@ to {
 				<div class="col-md-3 mt-5 mb-2">
 					<div class="card crd-ho">
 						<div class="card-body text-center">
-							<img alt="" class="book-card" src="books/<%=b.getPhotoName()%>"
+							<img alt="" style="height: 200px;" class="book-card" src="books/<%=b.getPhotoName()%>"
 								class="img-thumblin">
 							<p><%=b.getBookName()%></p>
 							<p><%=b.getAuthor()%></p>

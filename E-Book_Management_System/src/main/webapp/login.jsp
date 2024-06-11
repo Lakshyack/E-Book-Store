@@ -10,6 +10,12 @@
 <%@include file="all_component/allCss.jsp"%>
 </head>
 <body>
+	<c:if test="${not empty Adminobj }">
+		<% session.removeAttribute("Adminobj");%>
+	</c:if>
+	<c:if test="${not empty userobj }">
+	<%	session.removeAttribute("userobj");%>
+	</c:if>
 	<%@include file="all_component/navbar.jsp"%>
 	<div id="wrapper">
 		<div class="container p-3 ">

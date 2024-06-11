@@ -159,7 +159,7 @@
 							alt="">
 							 Profile Center</a> 
 							 <a href="setting.jsp" class="btn btn-light my-2 my-sm-0" type="submit">
-								<i class="fa-solid fa-gear"></i> User Menu
+								<i class="fa-solid fa-gear"></i> User DashBoard
 							</a>
 
 						
@@ -373,30 +373,43 @@
 				%>
 				<div class="col-md-3">
 					<div class="card crd-ho">
-						<div class="card-body text-center">
-							<img alt="" class="book-card" src="books/<%=b.getPhotoName()%>"
+						<div class="card-body text-center" style="padding-bottom: 40px;">
+							<img alt="" style="height: 200px;" class="book-card" src="books/<%=b.getPhotoName()%>"
 								class="img-thumblin">
-							<p><%=b.getBookName()%></p>
-							<p><%=b.getAuthor()%></p>
-							<p>
+							<p style="height: 20px; padding: 10px;"><%=b.getBookName()%></p>
+							<p style="height: 20px; padding: 10px;"><%=b.getAuthor()%></p>
+							<p style="height: 20px; padding: 10px;">
 
 								<%
 								if (b.getBookCategory().equals("Old")) {
 								%>
 								Category:
 								<%=b.getBookCategory()%>
-							<div class="row">
-								<a href="view_book.jsp?bid=<%=b.getBookId()%>"
-									class="btn btn-success btn-sm ml-5">View Details</a> <a href=""
-									class="btn btn-danger btn-sm ml-4"> <i
-									class="fa-solid fa-indian-rupee-sign"></i> <%=b.getPrice()%></a>
-							</div>
-							<%
+								<div class="row" style="height: 20px; padding: 10px;">
+									<%
+										if (u == null) {
+										%>
+										<a href="login.jsp" class="btn btn-danger btn-sm ml-5"><i
+											class="fa-solid fa-cart-shopping"></i> Add Cart</a>
+										<%
+										} else {
+										%>
+										<a href="cart?bid=<%=b.getBookId() %>&&uid=<%=u.getId() %>" class="btn btn-danger btn-sm ml-5"><i
+											class="fa-solid fa-cart-shopping"></i> Add Cart</a>
+										<%
+										}
+										%>
+										<a
+											href="view_book.jsp?bid=<%=b.getBookId()%>"
+											class="btn btn-success btn-sm ml-2">View Details</a> <a href=""
+											class="btn btn-danger btn-sm ml-2"><i
+											class="fa-solid fa-indian-rupee-sign"></i> <%=b.getPrice()%> </a>
+          							</div><%
 							} else {
 							%>
 							Category:
 							<%=b.getBookCategory()%>
-							<div class="row">
+							<div class="row" style="height: 20px; padding: 10px;">
 
 								<%
 								if (u == null) {
@@ -458,15 +471,15 @@
 				%>
 				<div class="col-md-3">
 					<div class="card crd-ho">
-						<div class="card-body text-center">
-							<img alt="" class="book-card" src="books/<%=b.getPhotoName()%>"
+						<div class="card-body text-center" style="padding-bottom: 40px;">
+							<img alt="" style="height: 200px;" class="book-card" src="books/<%=b.getPhotoName()%>"
 								class="img-thumblin">
-							<p><%=b.getBookName()%></p>
-							<p><%=b.getAuthor()%></p>
-							<p>
+							<p style="height: 20px; padding: 10px;"><%=b.getBookName()%></p>
+							<p style="height: 20px; padding: 10px;"><%=b.getAuthor()%></p>
+							<p style="height: 20px; padding: 10px;">
 								Category:
 								<%=b.getBookCategory()%></p>
-							<div class="row">
+							<div class="row" style="height: 20px; padding: 10px;">
 
 								<%
 								if (u == null) {
@@ -516,21 +529,35 @@
 				%>
 				<div class="col-md-3">
 					<div class="card crd-ho">
-						<div class="card-body text-center">
-							<img alt="" class="book-card" src="books/<%=b.getPhotoName()%>"
+						<div class="card-body text-center" style="padding-bottom: 40px;">
+							<img alt="" style="height: 200px;" class="book-card" src="books/<%=b.getPhotoName()%>"
 								class="img-thumblin">
-							<p><%=b.getBookName()%></p>
-							<p><%=b.getAuthor()%></p>
-							<p>
+							<p style="height: 20px; padding: 10px;"><%=b.getBookName()%></p>
+							<p style="height: 20px; padding: 10px;"><%=b.getAuthor()%></p>
+							<p style="height: 20px; padding: 10px;">
 								Category:
 								<%=b.getBookCategory()%></p>
-							<div class="row">
-								<a href="view_book.jsp?bid=<%=b.getBookId()%>"
-									class="btn btn-success btn-sm ml-5">View Details</a> <a href=""
-									class="btn btn-danger btn-sm ml-4"><i
-									class="fa-solid fa-indian-rupee-sign"></i> <%=b.getPrice()%> </a>
-							</div>
-
+								<div class="row" style="height: 20px; padding: 10px;">
+									<%
+										if (u == null) {
+										%>
+										<a href="login.jsp" class="btn btn-danger btn-sm ml-5"><i
+											class="fa-solid fa-cart-shopping"></i> Add Cart</a>
+										<%
+										} else {
+										%>
+										<a href="cart?bid=<%=b.getBookId() %>&&uid=<%=u.getId() %>" class="btn btn-danger btn-sm ml-5"><i
+											class="fa-solid fa-cart-shopping"></i> Add Cart</a>
+										<%
+										}
+										%>
+										<a
+											href="view_book.jsp?bid=<%=b.getBookId()%>"
+											class="btn btn-success btn-sm ml-2">View Details</a> <a href=""
+											class="btn btn-danger btn-sm ml-2"><i
+											class="fa-solid fa-indian-rupee-sign"></i> <%=b.getPrice()%> </a>
+          							</div>
+	
 						</div>
 
 					</div>
